@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+void checkArraySort(string array[],int array_size);
+
+int main()
+{
+	int count=-1;					//will store the number of words in the file created
+	ifstream access ("words_in.txt");		//opens file created in computer
+	string dummy;					//string that will read file
+	int check;
+
+	while(!access.eof())				//will read file and stop when everything has been read
+	{
+		access>>dummy;				//file is bheing read
+		count++;
+	}
+	cout<<"Number of words in file is "<<count<<": "<<endl;		//prints out number of words
+
+	string arr[count];				//string array is created with a the a size equivalent to the number of words in file
+
+	access.close();				//close file, good coding practice
+
+	ifstream accessArr("words_in.txt");			//open same file but now create another 
+
+	for(int i=0;i<count;i++)			//loop that will input words in the new created array
+	{
+		accessArr>>arr[i];				//words are being strored in array
+		cout<<arr[i]<<endl;
+
+	}
+	accessArr.close();
+	checkArraySort(arr,count);
+
+}
+
+void checkArraySort(string array[],int array_size)
+{
+	int i,j,key;
+	int arr1[array_size];
+	int arr2[array_size];
+	//ascending array comparasion
+	for(int w=0; w<array_size; w++)
+	{
+	arr1[w]=array[w].length();
+	cout<<arr1[w];
+	}
+
+	for(i=1;i<array_size;i++)
+	{
+		key=arr1[i];
+
+		for(j=i-1;(j>=0) && (arr1[j] < key);j--)
+		{
+			arr1[j+1] = arr1[j];
+		}
+		arr1[j+1] = key;
+	}
+	for(int w=0; w< array_size; w++)
+	{
+		cout<<arr1[w]<<endl;
+
+	}
+	for(int w=0; w<array_size; w++)
+        {
+        arr2[w]=array[w].length();
+        }
+
+
+}
+
